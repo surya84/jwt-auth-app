@@ -1,0 +1,37 @@
+go run github.com/99designs/gqlgen generate
+
+openssl genpkey -algorithm RSA -out private.pem -pkeyopt rsa_keygen_bits:2048
+openssl rsa -pubout -in private.pem -out public.pem
+
+
+create user 
+mutation CreateUser($input: empData!) {
+  createUser(input: $input)
+}
+
+{
+  "input": {
+    "name": "suryateja",
+    "email": "suryateja@gmail.com",
+    "empId": "12345"
+  }
+}
+
+-------------------------------------------------
+
+fetch user 
+query GetUserData($input: userRequest!) {
+  GetUserData(input: $input) {
+    name
+    email
+    empId
+  }
+}
+
+{
+  "input": {
+    "email": "suryateja@gmail.com"
+  }
+}
+
+------------------------------------------------
